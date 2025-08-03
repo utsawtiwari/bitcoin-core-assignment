@@ -1,0 +1,31 @@
+# .github/workflows/cd.yaml
+name: CD Pipeline
+
+on:
+  workflow_dispatch:  # Manual trigger only
+
+jobs:
+  run-regtest-network:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v3
+
+      - name: Run Docker Compose Up
+        run: docker compose up -d
+
+      - name: Wait for nodes to be ready
+        run: |
+          echo "Waiting for btc1 and btc2..."
+          sleep 10  # You can improve this with healthchecks or polling
+
+      - name: Run Transaction Script
+        run: |
+          chmod +x scripts/init-transaction.sh
+          ./scripts/init-transaction.sh
+
+      - name: Show Logs
+        run: docker compose logs
