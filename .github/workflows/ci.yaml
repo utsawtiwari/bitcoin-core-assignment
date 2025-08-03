@@ -7,7 +7,7 @@ on:
     paths:
       - 'scripts/**/*.sh'
       - 'docker-compose.yml'
-      - 'docker/Dockerfile'
+      - 'Dockerfile'
 
 jobs:
   lint-and-build:
