@@ -1,0 +1,49 @@
+services:
+  btc1:
+    build:
+      context: .
+    container_name: btc1
+    volumes:
+      - btc1_data:/home/bitcoin/.bitcoin
+    ports:
+      - "18443:18443"
+      - "18444:18444"
+    command: >
+      bitcoind -regtest=1
+               -rpcbind=0.0.0.0
+               -rpcallowip=0.0.0.0/0
+               -rpcuser=admin
+               -rpcpassword=pass
+               -fallbackfee=0.0002
+               -port=18444
+               -rpcport=18443
+               -server=1
+               -printtoconsole
+               -bind=0.0.0.0:18444
+
+  btc2:
+    build:
+      context: .
+    container_name: btc2
+    volumes:
+      - btc2_data:/home/bitcoin/.bitcoin
+    ports:
+      - "18445:18443"
+      - "18446:18444"
+    command: >
+      bitcoind -regtest=1
+               -rpcbind=0.0.0.0
+               -rpcallowip=0.0.0.0/0
+               -rpcuser=admin
+               -rpcpassword=pass
+               -fallbackfee=0.0002
+               -port=18446
+               -rpcport=18443
+               -server=1
+               -printtoconsole
+               -bind=0.0.0.0:18446
+               -connect=btc1:18444
+
+volumes:
+  btc1_data:
+  btc2_data:
