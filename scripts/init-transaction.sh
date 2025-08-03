@@ -24,7 +24,7 @@ ensure_wallet() {
     docker exec "$NODE" bitcoin-cli -regtest -rpcuser=$RPC_USER -rpcpassword=$RPC_PASS createwallet "$W"
   fi
 }
-#test
+#test_cicd
 wait_for_node $BTC1
 wait_for_node $BTC2
 
