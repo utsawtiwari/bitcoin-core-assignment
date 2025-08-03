@@ -78,12 +78,4 @@ btc2 balance: 0.10000000
 
 ---
 
-## 📄 Logs
 
-All transaction hashes and balances are recorded in:
-
-```
-scripts/transactions.log
-```
-
----
