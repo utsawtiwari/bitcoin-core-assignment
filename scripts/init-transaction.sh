@@ -36,7 +36,7 @@ TO_ADDR=$(docker exec $BTC2 bitcoin-cli -regtest -rpcuser=$RPC_USER -rpcpassword
 
 docker exec $BTC1 bitcoin-cli -regtest -rpcuser=$RPC_USER -rpcpassword=$RPC_PASS generatetoaddress 101 "$FROM_ADDR"
 
-for i in {1..5}; do
+for _ in {1..5}; do
   docker exec $BTC1 bitcoin-cli -regtest -rpcuser=$RPC_USER -rpcpassword=$RPC_PASS sendtoaddress "$TO_ADDR" 0.1
 done
 
